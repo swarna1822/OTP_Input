@@ -2,3 +2,15 @@
   font-family: sans-serif;
   text-align: center;
 }
+
+input {
+  height: 50px;
+  width: 50px;
+  margin: 5px;
+  font-size: 30px;
+  padding: 5px;
+  display:flex;
+  flex-direction:row;
+  justify-content:center;
+  align-items:center;
+}
