@@ -7,12 +7,9 @@ export default function App() {
   const [otp, setOtp] = useState(Array(numOfDigits).fill(""));
   const inputRef = useRef([]);
 
-  useEffect(() => {
-    inputRef.current[0].focus();
-  }, []);
   const handleOnchange = (e, idx) => {
     let value = e.target.value;
-    if (isNaN(value)) return;
+    if (!/^\d?$/.test(value)) return;
     setOtp((prev) => {
       const newOtp = [...prev];
       newOtp[idx] = value;
@@ -20,6 +17,12 @@ export default function App() {
     });
     if (idx !== otp.length - 1) {
       inputRef.current[idx + 1].focus();
+    }
+  };
+
+  const handleKeyDown = (e, idx) => {
+    if (!e.target.Value && e.key === "Backspace" && idx != 0) {
+      inputRef.current[idx - 1].focus();
     }
   };
   return (
@@ -35,6 +38,7 @@ export default function App() {
             style={styles.otpInput}
             ref={(el) => (inputRef.current[index] = el)}
             onChange={(e) => handleOnchange(e, index)}
+            onKeyUp={(e) => handleKeyDown(e, index)}
           />
         ))}
       </div>
